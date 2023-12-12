@@ -2,6 +2,7 @@
 TP BDD web, créer une API pour une application web de banque
 
 MCD : 
-![image](https://github.com/mathcrin/banque_tp_bdd_web/assets/73893829/c27b39d0-2fd3-4da2-a0da-568fe347ecfe)
+![image](https://github.com/mathcrin/banque_tp_bdd_web/assets/73893829/38e95379-0d1b-4d7d-8995-0c06c181674e)
+
 
 
