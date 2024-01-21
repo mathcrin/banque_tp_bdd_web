@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 public class CreationCarteRequest {
-    String titulaireCarte;
+    Integer titulaireCarte;
     @NotNull
     Number code;
 }

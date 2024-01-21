@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BanqueTpBddWebApplication {
 
 	public static void main(String[] args) {
-
-		Compte compte = Compte.builder()
-				.solde(1000.0)
-				.typeDeCompte(TypeDeCompte.COURANT)
-					.build();
-
 		SpringApplication.run(BanqueTpBddWebApplication.class, args);
 	}
 

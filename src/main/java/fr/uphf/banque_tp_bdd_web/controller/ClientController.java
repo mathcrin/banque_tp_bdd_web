@@ -21,11 +21,11 @@ public class ClientController {
     }
 
     @GetMapping()
-    public ResponseEntity<GetClientReponse> getClientByNomAndPrenom(@RequestParam String nom, @RequestParam String prenom) {
+    public ResponseEntity<?> getClientByNomAndPrenom(@RequestParam String nom, @RequestParam String prenom) {
         Client client = clientService.findByNomAndPrenom(nom, prenom);
         try {
             if(client == null){
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new HttpErrorResponse("Aucun client lié à ce nom et prénom"));
             }
             return ResponseEntity.ok(new GetClientReponse(
                     client.getId(),
@@ -37,16 +37,16 @@ public class ClientController {
                     client.getDateCreation()
             ));
         }catch (EntityNonTrouveeException e){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new HttpErrorResponse("Aucun client lié à ce nom et prénom"));
         }
     }
 
     @PostMapping()
-    public ResponseEntity<CreationClientReponse> saveClient(@RequestBody CreationClientRequest creationClientRequest) {
+    public ResponseEntity<?> createClient(@RequestBody CreationClientRequest creationClientRequest) {
         try {
             Client client = clientService.save(creationClientRequest);
             if(client == null){
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new HttpErrorResponse("Client non enregistré"));
             }
             return ResponseEntity.ok(new CreationClientReponse(
                     client.getId(),
@@ -58,16 +58,16 @@ public class ClientController {
                     client.getDateCreation()
             ));
         }catch (EntityNonEnregistrer e){
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new HttpErrorResponse("Client non enregistré"));
         }
     }
 
     @PutMapping()
-    public ResponseEntity<UpdateClientReponse> updateClient(@RequestBody UpdateClientRequest updateClientRequest) {
+    public ResponseEntity<?> updateClient(@RequestBody UpdateClientRequest updateClientRequest) {
         try {
             Client client = clientService.update(updateClientRequest);
             if(client == null){
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new HttpErrorResponse("Client non trouvé pour la mise à jour"));
             }
             return ResponseEntity.ok(new UpdateClientReponse(
                     client.getId(),
@@ -79,7 +79,7 @@ public class ClientController {
                     client.getDateCreation()
             ));
         }catch (EntityNonEnregistrer e){
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new HttpErrorResponse("Client non enregistré"));
         }
     }
 

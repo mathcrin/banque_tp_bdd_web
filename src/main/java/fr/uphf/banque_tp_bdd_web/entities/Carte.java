@@ -43,6 +43,10 @@ public class Carte {
     @JoinColumn(name = "compte_id")
     private Compte compte;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     @NotNull
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
@@ -51,5 +55,7 @@ public class Carte {
     @NotNull
     @Column(name = "date_creation")
     private LocalDateTime dateCreation;
+
+
 
 }

@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
+import java.util.List;
+
 @Value
 public class CreationCompteResponse {
     @NotBlank
@@ -11,7 +13,7 @@ public class CreationCompteResponse {
     @NotBlank
     String typeCompte;
     @NotNull
-    GetTitulairesCompteResponse titulaire;
+    List<GetTitulairesCompteResponse> titulairesCompte;
     @NotBlank
     String iban;
     @NotBlank

@@ -50,10 +50,7 @@ public class Client {
     @Column(name = "code_agence")
     private String codeAgence;
 
-    @ManyToMany
-    @JoinTable(name = "clients_comptes",
-            joinColumns = @JoinColumn(name = "clients_id"),
-            inverseJoinColumns = @JoinColumn(name = "comptes_id"))
+    @ManyToMany(mappedBy = "titulaires")
     private List<Compte> comptes = new ArrayList<>();
 
     @PastOrPresent
