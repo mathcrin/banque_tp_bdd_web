@@ -11,5 +11,5 @@ public class UpdateClientRequest {
     String nom;
     LocalDateTime dateNaissance;
     String telephone;
-    String adressePostale;
+    String addressePostale;
 }

@@ -1,6 +1,7 @@
 package fr.uphf.banque_tp_bdd_web.services;
 
 import fr.uphf.banque_tp_bdd_web.dto.CreationClientRequest;
+import fr.uphf.banque_tp_bdd_web.dto.UpdateClientRequest;
 import fr.uphf.banque_tp_bdd_web.entities.Client;
 import fr.uphf.banque_tp_bdd_web.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,16 @@ public class ClientService {
                         .codeAgence(codeAgence)
                         .dateCreation(LocalDateTime.now())
                 .build());
+    }
+
+    public Client update(UpdateClientRequest updateClientRequest) {
+        Client client = clientRepository.findById(updateClientRequest.getId()).orElseThrow();
+        if(updateClientRequest.getNom() != null) client.setNom(updateClientRequest.getNom());
+        if(updateClientRequest.getPrenom() != null) client.setPrenom(updateClientRequest.getPrenom());
+        if(updateClientRequest.getAddressePostale() != null) client.setAddressePostale(updateClientRequest.getAddressePostale());
+        if(updateClientRequest.getDateNaissance() != null) client.setDateNaissance(updateClientRequest.getDateNaissance());
+        if(updateClientRequest.getTelephone() != null) client.setTelephone(updateClientRequest.getTelephone());
+        if(updateClientRequest.getDateNaissance() != null) client.setAge(LocalDateTime.now().getYear() - updateClientRequest.getDateNaissance().getYear());
+        return clientRepository.save(client);
     }
 }
