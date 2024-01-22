@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
+import java.util.List;
+
 @Value
 public class GetCarteResponse {
     @NotBlank
@@ -11,5 +13,5 @@ public class GetCarteResponse {
     @NotBlank
     String dateExpiration;
     @NotNull
-    GetTitulairesCompteResponse titulaire;
+    List<GetTitulairesCompteResponse> titulaire;
 }

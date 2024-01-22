@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
  */
 @Value
 public class CreatePaiementRequest {
-    Integer montant;
+    Double montant;
     LocalDateTime datePaiement;
 }

@@ -3,18 +3,20 @@ package fr.uphf.banque_tp_bdd_web.services;
 import fr.uphf.banque_tp_bdd_web.dto.CreationClientRequest;
 import fr.uphf.banque_tp_bdd_web.dto.UpdateClientRequest;
 import fr.uphf.banque_tp_bdd_web.entities.Client;
+import fr.uphf.banque_tp_bdd_web.entities.Compte;
 import fr.uphf.banque_tp_bdd_web.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ClientService {
 
     private final ClientRepository clientRepository;
 
-    private final String codeAgence = "00001";
+    private final String codeAgence = "02054";
 
     @Autowired
     public ClientService(ClientRepository clientRepository) {
@@ -22,7 +24,7 @@ public class ClientService {
     }
 
     public Client findByNomAndPrenom(String nom, String prenom) {
-        return clientRepository.findByNomAndPrenom(nom, prenom);
+        return clientRepository.findOneByNomAndPrenom(nom, prenom);
     }
 
     public Client save(CreationClientRequest client) {
@@ -47,5 +49,9 @@ public class ClientService {
         if(updateClientRequest.getTelephone() != null) client.setTelephone(updateClientRequest.getTelephone());
         if(updateClientRequest.getDateNaissance() != null) client.setAge(LocalDateTime.now().getYear() - updateClientRequest.getDateNaissance().getYear());
         return clientRepository.save(client);
+    }
+
+    public List<Compte> getComptes(Integer identifiantClient) {
+        return clientRepository.findById(identifiantClient).orElseThrow().getComptes();
     }
 }

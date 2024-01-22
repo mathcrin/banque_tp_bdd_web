@@ -36,13 +36,23 @@ public class Compte {
     @Column(name = "type_de_compte")
     private TypeDeCompte typeDeCompte;
 
+    @OneToMany(mappedBy = "compte", orphanRemoval = true)
+    @OrderBy("dateCreation DESC")
+    private List<Transaction> transactions = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "comptes")
-    private List<Client> clients = new ArrayList<>();
-
+    @OneToMany(mappedBy = "compte", orphanRemoval = true)
+    @OrderBy("dateCreation DESC")
+    private List<Carte> cartes = new ArrayList<>();
 
     @PastOrPresent
     @NotNull
     @Column(name = "date_creation")
     private LocalDateTime dateCreation;
+
+    @ManyToMany
+    @JoinTable(name = "clients_comptes",
+            joinColumns = @JoinColumn(name = "comptes_id"),
+            inverseJoinColumns = @JoinColumn(name = "clients_id"))
+    private List<Client> titulaires = new ArrayList<>();
+
 }

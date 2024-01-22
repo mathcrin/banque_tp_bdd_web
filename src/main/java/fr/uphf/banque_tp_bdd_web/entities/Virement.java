@@ -38,8 +38,11 @@ public class Virement {
     @Column(name = "libelle_virement")
     private String libelleVirement;
 
-    @Column(name = "id_transaction")
-    private Integer idTransaction;
+    @Column(name = "id_transaction_emmeteur")
+    private Integer idTransactionEmmeteur;
+
+    @Column(name = "id_transaction_beneficiaire")
+    private Integer idTransactionBeneficiaire;
 
     @NotNull
     @Column(name = "date_execution")

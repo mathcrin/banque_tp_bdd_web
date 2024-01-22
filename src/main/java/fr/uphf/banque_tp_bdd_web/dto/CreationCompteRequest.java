@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
+import java.util.List;
+
 @Value
 public class CreationCompteRequest {
     @NotBlank
@@ -12,5 +14,5 @@ public class CreationCompteRequest {
     @NotBlank
     String typeCompte;
     @NotNull
-    GetTitulairesCompteResponse titulaire;
+    List<GetTitulairesCompteResponse> titulairesCompte;
 }
