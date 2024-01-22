@@ -132,6 +132,23 @@ public class CompteController {
         }
     }
 
-
+    @PostMapping("/{iban}/cartes/{numeroCarte}/paiement")
+    public ResponseEntity<?> paiement(@PathVariable String iban, @PathVariable String numeroCarte, @RequestBody CreatePaiementRequest request) {
+        try {
+            Transaction transaction = compteService.paiement(iban, numeroCarte, request);
+            return ResponseEntity.ok(new CreatePaiementReponse(
+                    transaction.getId(),
+                    transaction.getMontant(),
+                    transaction.getTypeDeTransaction().toString(),
+                    transaction.getDateCreation()
+            ));
+        } catch (EntityNonEnregistrer e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new HttpErrorResponse("Paiement non effectué"));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HttpErrorResponse("iban ou numeroCarte spécifié non trouvé"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HttpErrorResponse(e.getMessage()));
+        }
+    }
 
 }

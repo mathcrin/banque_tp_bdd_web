@@ -24,7 +24,7 @@ public class ClientService {
     }
 
     public Client findByNomAndPrenom(String nom, String prenom) {
-        return clientRepository.findByNomAndPrenom(nom, prenom);
+        return clientRepository.findOneByNomAndPrenom(nom, prenom);
     }
 
     public Client save(CreationClientRequest client) {

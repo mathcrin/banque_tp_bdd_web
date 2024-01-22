@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Value
 public class CreatePaiementReponse {
     Integer id;
-    Integer montant;
+    Double montant;
     String typeDeTransaction;
     LocalDateTime dateCreation;
 }
